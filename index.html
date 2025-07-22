@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open When You're Ready</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="question-container" id="question">
+            <h2>Open this when you're okay</h2>
+            <div class="buttons">
+                <button id="yes-btn">Open</button>
+                <button id="no-btn">Close</button>
+            </div>
+        </div>
+        <div class="envelope-wrapper" id="envelope" style="display: none;">
+            <div class="envelope">
+                <div class="heart"></div>
+            </div>
+        </div>
+        <div class="letter" style="display: none;">
+            <div class="text">
+                <strong>My Dearest,</strong>
+                <p>
+                   kurt wow.
+                </p>
+                <p>
+ni  hao ma                </p>
+                <p>With all my love, jobert</p>
+            </div>
+            <div class="view-memories">
+                <button id="view-photos">View Our Memories ❤️</button>
+            </div>
+        </div>
+        <!-- Add the photo gallery section -->
+        <div id="photo-gallery" style="display: none;">
+            <div class="gallery-container">
+                <div class="arrow left-arrow">❮</div>
+                <div class="photo-container">
+                    <!-- Replace these with your actual photos and add custom captions -->
+                    <div class="photo active" data-caption="Me making this hehehe">
+                        <img src="photo1.jpg" alt="Us together" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300?text=Our+Photo+1';">
+                    </div>
+                    <div class="photo" data-caption="Remember this day? You couldn't stop laughing at my jokes.">
+                        <img src="photo2.jpg" alt="Special day" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300?text=Our+Photo+2';">
+                    </div>
+                    <div class="photo" data-caption="Our trip to the mountains was unforgettable. I want to create more memories like this.">
+                        <img src="photo3.jpg" alt="Happy memories" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300?text=Our+Photo+3';">
+                    </div>
+                    <div class="photo" data-caption="Every moment with you is precious. I'm so grateful to have you in my life.">
+                        <img src="photo4.jpg" alt="Together forever" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300?text=Our+Photo+4';">
+                    </div>
+                </div>
+                <div class="arrow right-arrow">❯</div>
+            </div>
+            <div class="gallery-caption">
+                <h3 id="photo-count">Photo 1 of 4</h3>
+                <p id="photo-caption">Our special moments together ❤️</p>
+            </div>
+            <div class="back-button">
+                <button id="back-to-letter">Back to Letter</button>
+            </div>
+        </div>
+        <div id="hugs-container" style="display: none; text-align: center;">
+            <div class="hug-image-container">
+                <img src="hug.gif" alt="Hugs" onerror="this.onerror=null; this.src='hug.png'; if(this.src.includes('png')) this.onerror=null;" style="max-width: 300px; margin-bottom: 20px;">
+            </div>
+            <h3 style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--txt-color);">
+                I understand love, I'm here lang po nehh ❤️   
+            </h3>
+        </div>
+        <div class="floating-icons">
+            <!-- Multiple copies of your images for more floating elements -->
+            <div class="floating-icon"><img src="mariepixel.png" alt="Icon 1"></div>
+            <div class="floating-icon"><img src="mariewalk.png" alt="Icon 2"></div>
+            <div class="floating-icon"><img src="hmp.png" alt="Icon 3"></div>
+            <div class="floating-icon"><img src="cina.png" alt="Icon 4"></div>
+            
+            <div class="floating-icon"><img src="mariepixel.png" alt="Icon 5"></div>
+            <div class="floating-icon"><img src="mariewalk.png" alt="Icon 6"></div>
+            <div class="floating-icon"><img src="hmp.png" alt="Icon 3"></div>
+            <div class="floating-icon"><img src="cina.png" alt="Icon 4"></div>
+            
+            <div class="floating-icon"><img src="mariepixel.png" alt="Icon 1"></div>
+            <div class="floating-icon"><img src="mariewalk.png" alt="Icon 2"></div>
+            <div class="floating-icon"><img src="hmp.png" alt="Icon 3"></div>
+            <div class="floating-icon"><img src="cina.png" alt="Icon 4"></div>
+            
+            <div class="floating-icon"><img src="mariepixel.png" alt="Icon 1"></div>
+            <div class="floating-icon"><img src="mariewalk.png" alt="Icon 2"></div>
+            <div class="floating-icon"><img src="hmp.png" alt="Icon 3"></div>
+            <div class="floating-icon"><img src="cina.png" alt="Icon 4"></div>
+            
+            <div class="floating-icon"><img src="mariepixel.png" alt="Icon 1"></div>
+            <div class="floating-icon"><img src="mariewalk.png" alt="Icon 2"></div>
+            <div class="floating-icon"><img src="hmp.png" alt="Icon 3"></div>
+            <div class="floating-icon"><img src="cina.png" alt="Icon 4"></div>
+        </div>
+    </div>
+    <div class="music-player">
+        <div class="music-controls">
+            <button id="play-pause-btn">
+                <i class="play-icon">♫</i>
+                <i class="pause-icon" style="display:none;">❚❚</i>
+            </button>
+            <div class="song-info">
+                <span class="song-title">I Don't Wanna Be Okay Without You</span>
+                <span class="song-artist">Charlie Burg</span>
+            </div>
+        </div>
+        <audio id="background-music" loop>
+            <source src="Charlie Burg - I Don't Wanna Be Okay Without You.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <script>
+        const envelope = document.querySelector('.envelope-wrapper');
+        const letter = document.querySelector('.letter');
+        const photoGallery = document.getElementById('photo-gallery');
+        const viewPhotosBtn = document.getElementById('view-photos');
+        const backToLetterBtn = document.getElementById('back-to-letter');
+        const photos = document.querySelectorAll('.photo');
+        const photoCount = document.getElementById('photo-count');
+        const photoCaption = document.getElementById('photo-caption');
+        let currentPhoto = 0;
+
+        // Show music player after envelope is opened
+        envelope.addEventListener('click', () => {
+            envelope.classList.add('fade-out');
+            setTimeout(() => {
+                envelope.style.display = 'none';
+                letter.style.display = 'block';
+                
+                // Show the elegant music player at the top
+                document.querySelector('.music-player').classList.add('visible');
+            }, 500);
+        });
+
+        // Start playing when "Open" is clicked
+        document.getElementById('yes-btn').addEventListener('click', () => {
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('envelope').style.display = 'block';
+            
+            // Start playing music when the Open button is clicked
+            const audio = document.getElementById('background-music');
+            
+            // Play the music but keep player hidden until envelope opens
+            audio.play().catch(error => {
+                console.log("Auto-play was prevented. User needs to interact with the page first.");
+            });
+            
+            // Update the player state (but it's still hidden)
+            document.querySelector('.play-icon').style.display = 'none';
+            document.querySelector('.pause-icon').style.display = 'block';
+        });
+        
+        document.getElementById('no-btn').addEventListener('click', () => {
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('hugs-container').style.display = 'block';
+        });
+
+        // Photo gallery navigation
+        viewPhotosBtn.addEventListener('click', () => {
+            letter.style.display = 'none';
+            photoGallery.style.display = 'block';
+        });
+
+        backToLetterBtn.addEventListener('click', () => {
+            photoGallery.style.display = 'none';
+            letter.style.display = 'block';
+        });
+
+        function updatePhotoGallery() {
+            photoCount.textContent = `Photo ${currentPhoto + 1} of ${photos.length}`;
+            
+            // Update each photo's visibility
+            photos.forEach((photo, index) => {
+                photo.classList.toggle('active', index === currentPhoto);
+                
+                // If this is the current photo, update the caption
+                if (index === currentPhoto) {
+                    // Get custom caption from data attribute or use default
+                    const customCaption = photo.getAttribute('data-caption');
+                    photoCaption.textContent = customCaption || 'Our special moments together ❤️';
+                }
+            });
+        }
+
+        document.querySelector('.left-arrow').addEventListener('click', () => {
+            currentPhoto = (currentPhoto > 0) ? currentPhoto - 1 : photos.length - 1;
+            updatePhotoGallery();
+        });
+
+        document.querySelector('.right-arrow').addEventListener('click', () => {
+            currentPhoto = (currentPhoto < photos.length - 1) ? currentPhoto + 1 : 0;
+            updatePhotoGallery();
+        });
+
+        // Initialize photo gallery
+        updatePhotoGallery();
+
+        // Music player functionality
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playIcon = document.querySelector('.play-icon');
+        const pauseIcon = document.querySelector('.pause-icon');
+        const audio = document.getElementById('background-music');
+        const disc = document.querySelector('.disc');
+
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                disc.classList.add('playing');
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            } else {
+                audio.pause();
+                disc.classList.remove('playing');
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            }
+        });
+
+        // Optional: Automatically play music when the envelope is opened
+        document.querySelector('.heart').addEventListener('click', () => {
+            // Wait for envelope animation to complete
+            setTimeout(() => {
+                if (audio.paused) {
+                    audio.play();
+                    disc.classList.add('playing');
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
