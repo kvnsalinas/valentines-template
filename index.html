@@ -7,6 +7,17 @@
     <title>Open When You're Ready</title>
     <link rel="stylesheet" href="./style.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes pulse-button {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.toggle-btn.just-clicked {
+  animation: pulse-button 0.5s;
+}
+    </style>
 </head>
 <body>
     <div class="container">
@@ -100,7 +111,12 @@
         </div>
 
         <div class="countdown-container">
-          <h3>Time Until Our Anniversary - May 25th</h3>
+          <div class="countdown-toggle">
+            <button id="anniversary-btn" class="toggle-btn active">Anniversary</button>
+            <button id="monthsary-btn" class="toggle-btn">Monthsary</button>
+          </div>
+          
+          <h3 id="countdown-title">Time Until Our Anniversary - May 25th</h3>
           <div id="countdown">
             <div class="time-section">
               <span id="days">00</span>
@@ -321,7 +337,6 @@
 
         // Trigger hearts when envelope is opened
         envelope.addEventListener('click', () => {
-          // Existing code...
           setTimeout(() => {
             createHearts();
             setInterval(createHearts, 10000); // Create new hearts every 10 seconds
@@ -353,57 +368,134 @@
           }
         }
 
-        // Countdown timer function
-        function startCountdown() {
-          function getNextAnniversary() {
-            const now = new Date();
-            const currentYear = now.getFullYear();
-            
-            // Create date object for May 25th of current year
-            let nextAnniversary = new Date(currentYear, 4, 25); // Month is 0-indexed (4 = May)
-            
-            // If May 25th has already passed this year, set for next year
-            if (now > nextAnniversary) {
-              nextAnniversary = new Date(currentYear + 1, 4, 25);
-            }
-            
-            return nextAnniversary;
-          }
-          
-          function updateCountdown() {
-            const now = new Date().getTime();
-            let targetDate = getNextAnniversary().getTime();
-            const distance = targetDate - now;
-            
-            // Time calculations
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            // Display the result
-            document.getElementById("days").textContent = days.toString().padStart(2, "0");
-            document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
-            document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
-            document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
-            
-            // If the countdown is finished, display a special message for the day
-            // but don't clear the interval - let it continue for next year
-            if (distance < 0) {
-              document.getElementById("countdown").innerHTML = "<p>Happy Anniversary! 💖</p>";
-              
-              // Reset the countdown for next day check
-              setTimeout(updateCountdown, 86400000); // Check again in 24 hours
-            }
-          }
-          
-          // Update countdown immediately
-          updateCountdown();
-          
-          // Update the countdown every second
-          const countdownTimer = setInterval(updateCountdown, 1000);
-        }
-        document.querySelectorAll('.love-spot').forEach(spot => {
+        // Countdown timer function with support for Anniversary and Monthsary
+function startCountdown() {
+  let countdownMode = 'anniversary'; // Default mode
+  const countdownTitle = document.getElementById('countdown-title');
+  const anniversaryBtn = document.getElementById('anniversary-btn');
+  const monthsaryBtn = document.getElementById('monthsary-btn');
+  
+  // Get next anniversary (May 25th of current or next year)
+  function getNextAnniversary() {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    
+    // Create date object for May 25th of current year
+    let nextAnniversary = new Date(currentYear, 4, 25); // Month is 0-indexed (4 = May)
+    
+    // If May 25th has already passed this year, set for next year
+    if (now > nextAnniversary) {
+      nextAnniversary = new Date(currentYear + 1, 4, 25);
+    }
+    
+    return nextAnniversary;
+  }
+  
+  // Get next monthsary (25th of current or next month)
+  function getNextMonthsary() {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth();
+    
+    // Create date object for 25th of current month
+    let nextMonthsary = new Date(currentYear, currentMonth, 25);
+    
+    // If the 25th has already passed this month, set for next month
+    if (now > nextMonthsary) {
+      // If December, go to January of next year
+      if (currentMonth === 11) {
+        nextMonthsary = new Date(currentYear + 1, 0, 25);
+      } else {
+        nextMonthsary = new Date(currentYear, currentMonth + 1, 25);
+      }
+    }
+    
+    return nextMonthsary;
+  }
+  
+  function getTargetDate() {
+    return countdownMode === 'anniversary' ? getNextAnniversary() : getNextMonthsary();
+  }
+  
+  function updateTitle() {
+    if (countdownMode === 'anniversary') {
+      const targetDate = getNextAnniversary();
+      const year = targetDate.getFullYear();
+      countdownTitle.textContent = `Time Until Our Anniversary - May 25th, ${year}`;
+    } else {
+      const targetDate = getNextMonthsary();
+      const month = targetDate.toLocaleString('default', { month: 'long' });
+      const year = targetDate.getFullYear();
+      countdownTitle.textContent = `Time Until Our Monthsary - ${month} 25th, ${year}`;
+    }
+  }
+  
+  function updateCountdown() {
+    const now = new Date().getTime();
+    let targetDate = getTargetDate().getTime();
+    const distance = targetDate - now;
+    
+    // Time calculations
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Display the result
+    document.getElementById("days").textContent = days.toString().padStart(2, "0");
+    document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+    document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+    document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+    
+    // If the countdown is finished, display a special message
+    if (distance < 0) {
+      const messageType = countdownMode === 'anniversary' ? 'Anniversary' : 'Monthsary';
+      document.getElementById("countdown").innerHTML = `<p>Happy ${messageType}! 💖</p>`;
+      
+      // Reset the countdown for next day check
+      setTimeout(updateCountdown, 86400000); // Check again in 24 hours
+    }
+  }
+  
+  // Add event listeners for toggle buttons
+  anniversaryBtn.addEventListener('click', function() {
+  if (countdownMode !== 'anniversary') {
+    countdownMode = 'anniversary';
+    anniversaryBtn.classList.add('active');
+    monthsaryBtn.classList.remove('active');
+    updateTitle();
+    updateCountdown();
+    
+    // Add animation class
+    this.classList.add('just-clicked');
+    setTimeout(() => this.classList.remove('just-clicked'), 500);
+  }
+});
+
+monthsaryBtn.addEventListener('click', function() {
+  if (countdownMode !== 'monthsary') {
+    countdownMode = 'monthsary';
+    monthsaryBtn.classList.add('active');
+    anniversaryBtn.classList.remove('active');
+    updateTitle();
+    updateCountdown();
+    
+    // Add animation class
+    this.classList.add('just-clicked');
+    setTimeout(() => this.classList.remove('just-clicked'), 500);
+  }
+});
+  
+  // Initialize title
+  updateTitle();
+  
+  // Update countdown immediately
+  updateCountdown();
+  
+  // Update the countdown every second
+  const countdownTimer = setInterval(updateCountdown, 1000);
+}
+document.querySelectorAll('.love-spot').forEach(spot => {
   spot.addEventListener('click', function() {
     const message = document.createElement('div');
     message.className = 'love-message';

@@ -779,6 +779,45 @@ body {
   color: #8b5d77;
 }
 
+/* Countdown toggle styles */
+.countdown-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.toggle-btn {
+  padding: 8px 15px;
+  background: #ffd6e5;
+  border: 2px solid #ff85a2;
+  border-radius: 20px;
+  color: #e75480;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+  background: #ff85a2;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 3px 10px rgba(255, 133, 162, 0.4);
+}
+
+.toggle-btn:hover:not(.active) {
+  background: #ffc1d5;
+  transform: translateY(-2px);
+}
+
+@media screen and (max-width: 768px) {
+  .toggle-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
 /* Fade-out animation */
 .fade-out {
   animation: fadeOut 0.5s forwards;
