@@ -24,16 +24,14 @@
         </div>
         <div class="letter" style="display: none;">
             <div class="text">
-                <strong>My Dearest,</strong>
-                <p>
-                   kurt wow.
-                </p>
-                <p>
-ni  hao ma                </p>
+                <strong>To my Love,</strong>
+                <p>Every day with you feels like a blessing. Your smile brightens my darkest days and your laugh is my favorite melody.</p>
+                <p>I cherish all our memories together and look forward to creating countless more. Thank you for being exactly who you are.</p>
                 <p>With all my love, jobert</p>
             </div>
             <div class="view-memories">
                 <button id="view-photos">View Our Memories ❤️</button>
+                <button id="view-coupon">View Your Gift ✨</button>
             </div>
         </div>
         <!-- Add the photo gallery section -->
@@ -100,6 +98,59 @@ ni  hao ma                </p>
             <div class="floating-icon"><img src="hmp.png" alt="Icon 3"></div>
             <div class="floating-icon"><img src="cina.png" alt="Icon 4"></div>
         </div>
+
+        <div class="countdown-container">
+          <h3>Time Until Our Anniversary - May 25th</h3>
+          <div id="countdown">
+            <div class="time-section">
+              <span id="days">00</span>
+              <span class="time-label">Days</span>
+            </div>
+            <div class="time-section">
+              <span id="hours">00</span>
+              <span class="time-label">Hours</span>
+            </div>
+            <div class="time-section">
+              <span id="minutes">00</span>
+              <span class="time-label">Minutes</span>
+            </div>
+            <div class="time-section">
+              <span id="seconds">00</span>
+              <span class="time-label">Seconds</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="love-messages">
+          <div class="love-spot" style="top: 20%; left: 15%;" data-message="You make my heart smile!"></div>
+          <div class="love-spot" style="top: 70%; left: 80%;" data-message="Every moment with you is a blessing"></div>
+          <div class="love-spot" style="top: 40%; left: 75%;" data-message="You're my favorite person"></div>
+          <div class="love-spot" style="top: 80%; left: 30%;" data-message="I love your laugh"></div>
+        </div>
+
+        <div class="coupon" id="love-coupon" style="display: none;">
+          <div class="coupon-inner">
+            <h2>Love Coupon</h2>
+            <p class="coupon-text">This coupon entitles you to:</p>
+            <h3>One Special Date Night</h3>
+            <p class="coupon-note">Redeemable anytime. No expiration.</p>
+            <p class="coupon-signature">With all my love, jobert</p>
+            <div class="coupon-hearts"></div>
+          </div>
+          
+          <div class="email-form">
+            <h4>Send this coupon to your email</h4>
+            <div class="form-group">
+              <input type="email" id="recipient-email" placeholder="Enter your email address" required>
+            </div>
+            <button id="send-email-btn" class="send-btn">Email this Coupon</button>
+            <div id="email-status" class="email-status"></div>
+          </div>
+          
+          <div class="back-button">
+            <button id="back-from-coupon">Back to Letter</button>
+          </div>
+        </div>
     </div>
     <div class="music-player">
         <div class="music-controls">
@@ -137,6 +188,9 @@ ni  hao ma                </p>
                 
                 // Show the elegant music player at the top
                 document.querySelector('.music-player').classList.add('visible');
+                
+                // Make sure countdown is running
+                startCountdown();
             }, 500);
         });
 
@@ -236,6 +290,215 @@ ni  hao ma                </p>
                 }
             }, 1000);
         });
+
+        // Create falling hearts animation
+        function createHearts() {
+          const container = document.getElementById('falling-hearts');
+          const heartCount = 20;
+          
+          for (let i = 0; i < heartCount; i++) {
+            setTimeout(() => {
+              const heart = document.createElement('div');
+              heart.classList.add('heart-animation');
+              
+              // Random position and size
+              heart.style.left = Math.random() * 100 + '%';
+              heart.style.opacity = Math.random() * 0.7 + 0.3;
+              heart.style.fontSize = Math.random() * 15 + 10 + 'px';
+              
+              // Set animation duration randomly
+              heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+              
+              container.appendChild(heart);
+              
+              // Remove heart after animation completes
+              setTimeout(() => {
+                heart.remove();
+              }, 6000);
+            }, i * 300);
+          }
+        }
+
+        // Trigger hearts when envelope is opened
+        envelope.addEventListener('click', () => {
+          // Existing code...
+          setTimeout(() => {
+            createHearts();
+            setInterval(createHearts, 10000); // Create new hearts every 10 seconds
+          }, 500);
+        });
+
+        // Add this inside your script tag
+        const yesBtn = document.getElementById('yes-btn');
+        yesBtn.addEventListener('click', function() {
+          // Create confetti effect
+          createConfetti();
+          
+        });
+
+        function createConfetti() {
+          for (let i = 0; i < 150; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDelay = Math.random() * 3 + 's';
+            confetti.style.backgroundColor = ['#ff85a2', '#ff9db7', '#ffc1d5', '#ffb6c1', 
+                                             '#ffd6e5'][Math.floor(Math.random() * 5)];
+            document.body.appendChild(confetti);
+            
+            // Remove confetti after animation
+            setTimeout(() => {
+              confetti.remove();
+            }, 6000);
+          }
+        }
+
+        // Countdown timer function
+        function startCountdown() {
+          function getNextAnniversary() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            
+            // Create date object for May 25th of current year
+            let nextAnniversary = new Date(currentYear, 4, 25); // Month is 0-indexed (4 = May)
+            
+            // If May 25th has already passed this year, set for next year
+            if (now > nextAnniversary) {
+              nextAnniversary = new Date(currentYear + 1, 4, 25);
+            }
+            
+            return nextAnniversary;
+          }
+          
+          function updateCountdown() {
+            const now = new Date().getTime();
+            let targetDate = getNextAnniversary().getTime();
+            const distance = targetDate - now;
+            
+            // Time calculations
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Display the result
+            document.getElementById("days").textContent = days.toString().padStart(2, "0");
+            document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+            document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+            document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+            
+            // If the countdown is finished, display a special message for the day
+            // but don't clear the interval - let it continue for next year
+            if (distance < 0) {
+              document.getElementById("countdown").innerHTML = "<p>Happy Anniversary! 💖</p>";
+              
+              // Reset the countdown for next day check
+              setTimeout(updateCountdown, 86400000); // Check again in 24 hours
+            }
+          }
+          
+          // Update countdown immediately
+          updateCountdown();
+          
+          // Update the countdown every second
+          const countdownTimer = setInterval(updateCountdown, 1000);
+        }
+        document.querySelectorAll('.love-spot').forEach(spot => {
+  spot.addEventListener('click', function() {
+    const message = document.createElement('div');
+    message.className = 'love-message';
+    message.textContent = this.dataset.message;
+    
+    // Position the message above the spot
+    message.style.top = (parseInt(this.style.top) - 10) + '%';
+    message.style.left = this.style.left;
+    
+    document.querySelector('.love-messages').appendChild(message);
+    
+    // Remove message after animation completes
+    setTimeout(() => {
+      message.remove();
+    }, 2000);
+  });
+});
+
+        // Start the countdown when the letter appears
+        /*
+        letter.addEventListener('DOMNodeInserted', function() {
+          if (this.style.display === 'block') {
+            startCountdown();
+          }
+        });
+        */
+
+        // Initialize the countdown right away
+        startCountdown();
+
+        // Coupon functionality
+const viewCouponBtn = document.getElementById('view-coupon');
+const couponDiv = document.getElementById('love-coupon');
+const backFromCouponBtn = document.getElementById('back-from-coupon');
+const sendEmailBtn = document.getElementById('send-email-btn');
+const recipientEmail = document.getElementById('recipient-email');
+const emailStatus = document.getElementById('email-status');
+
+// Show coupon when button is clicked
+viewCouponBtn.addEventListener('click', () => {
+    letter.style.display = 'none';
+    couponDiv.style.display = 'block';
+});
+
+// Return to letter from coupon
+backFromCouponBtn.addEventListener('click', () => {
+    couponDiv.style.display = 'none';
+    letter.style.display = 'block';
+});
+
+// Send email with coupon
+sendEmailBtn.addEventListener('click', () => {
+    const email = recipientEmail.value.trim();
+    if (!email) {
+        emailStatus.textContent = 'Please enter your email address';
+        emailStatus.className = 'email-status error';
+        return;
+    }
+    
+    // Disable button while processing
+    sendEmailBtn.disabled = true;
+    sendEmailBtn.textContent = 'Sending...';
+    emailStatus.textContent = '';
+    
+    // Create form data
+    const formData = new FormData();
+    formData.append('email', email);
+    
+    // Send AJAX request
+    fetch('send-coupon.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            emailStatus.textContent = data.message;
+            emailStatus.className = 'email-status success';
+            recipientEmail.value = '';
+        } else {
+            emailStatus.textContent = data.message;
+            emailStatus.className = 'email-status error';
+        }
+    })
+    .catch(error => {
+        emailStatus.textContent = 'An error occurred. Please try again.';
+        emailStatus.className = 'email-status error';
+        console.error('Error:', error);
+    })
+    .finally(() => {
+        // Re-enable button
+        sendEmailBtn.disabled = false;
+        sendEmailBtn.textContent = 'Email this Coupon';
+    });
+});
     </script>
 </body>
 </html>
