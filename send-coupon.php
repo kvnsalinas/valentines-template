@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p style="color: #8b5d77;">This coupon entitles you to:</p>
                 <h3 style="font-family: cursive; color: #ff85a2; font-size: 24px; margin: 20px 0;">Unlimited Special Date Night</h3>
                 <p style="font-style: italic; font-size: 14px; color: #8b5d77;">Redeemable anytime. No expiration.</p>
-                <p style="color: #8b5d77; margin-top: 15px;">Just present your screenshot anytime ❤️</p>
+                <p><img src="cid:mariepixel" alt="marie" style="height: 20px; vertical-align: middle;"> <style="color: #8b5d77; margin-top: 15px;">Just present your screenshot anytime <img src="cid:mariepixel" alt="marie" style="height: 20px; vertical-align: middle;"></p>
                 <p style="font-family: cursive; font-size: 18px; color: #e75480; margin-top: 25px;">With all my love, jobert</p>
             </div>
             
@@ -56,6 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         ';
         
+        // Add the embedded image
+        $mail->addEmbeddedImage('/home/kevin/Desktop/valentines-template/mariepixel.png', 'mariepixel', 'mariepixel.png');
+
         $mail->send();
         echo json_encode(['success' => true, 'message' => 'Coupon sent successfully!']);
     } catch (Exception $e) {
