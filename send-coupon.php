@@ -31,12 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Port = 587;
         
         // Recipients
-        $mail->setFrom('kevinsalinas408@gmail.com', 'Valentine\'s Coupon'); // Change to your email
+        $mail->setFrom('kevinsalinas408@gmail.com', 'Surprise Coupon'); // Change to your email
         $mail->addAddress($recipient);  
         
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Special Love Coupon for You!';
+        $mail->Subject = "Here's a MarieBean Coupon for You!";
         
         // Email body with coupon HTML
         $mail->Body = '
@@ -44,12 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h1 style="color: #e75480; text-align: center;">Your Special Love Coupon</h1>
             
             <div style="background-color: #fff; border: 2px dashed #ff85a2; border-radius: 15px; padding: 30px; text-align: center; margin: 20px 0;">
-                <h2 style="font-family: cursive; color: #e75480;">Love Coupon</h2>
+                <h2 style="font-family: cursive; color: #e75480;">MarieBean Coupon</h2>
                 <p style="color: #8b5d77;">This coupon entitles you to:</p>
                 <h3 style="font-family: cursive; color: #ff85a2; font-size: 24px; margin: 20px 0;">Unlimited Special Date Night</h3>
                 <p style="font-style: italic; font-size: 14px; color: #8b5d77;">Redeemable anytime. No expiration.</p>
                 <p><img src="cid:mariepixel" alt="marie" style="height: 20px; vertical-align: middle;"> <style="color: #8b5d77; margin-top: 15px;">Just present your screenshot anytime <img src="cid:mariepixel" alt="marie" style="height: 20px; vertical-align: middle;"></p>
-                <p style="font-family: cursive; font-size: 18px; color: #e75480; margin-top: 25px;">With all my love, jobert</p>
+                <p style="font-family: cursive; font-size: 18px; color: #e75480; margin-top: 25px;">Use this for special occasions (Example: Movie Night or Game Night)</p>
             </div>
             
             <p style="text-align: center; color: #666;">This coupon was sent to you by someone who cares about you very much.</p>

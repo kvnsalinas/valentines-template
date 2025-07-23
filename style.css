@@ -1,14 +1,15 @@
-:root{
+:root {
+  /* Existing variables */
   --primary: #fff;
   --bg-color: #ffccd5; /* Pastel pink background */
-  --bg-envelope-color: #fff0f5; /* Very light pink envelope */
-  --envelope-tab: #ffe0eb; /* Soft pastel pink for envelope tab */
-  --envelope-cover: #ffd6e5; /* Lighter pink for envelope cover */
-  --shadow-color: rgba(255, 182, 193, 0.3); /* Lighter pink shadow */
-  --txt-color: #e75480; /* Softer pink text */
-  --heart-color: #ffb6c1; /* Classic light pink heart */
+  
+  /* Add navy blue variables */
+  --navy-blue: #1a3561;
+  --navy-light: #2c4e8a;
+  --navy-accent: #0f294d;
 }
 
+/* Additional styles using the new navy blue variables */
 body {
   margin: 0;
   padding: 0;
@@ -458,6 +459,11 @@ body {
 }
 
 .arrow {
+  color: var(--navy-blue);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.arrow {
   font-size: 2rem;
   color: #ff85a2;
   cursor: pointer;
@@ -485,7 +491,7 @@ body {
 
 .gallery-caption h3 {
   font-family: 'Dancing Script', cursive;
-  color: #e75480;
+  color: var(--navy-blue);
   margin-bottom: 5px;
 }
 
@@ -744,10 +750,11 @@ body {
 .countdown-container {
   margin: 30px auto;
   text-align: center;
-  background: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 240, 245, 0.8));
+  border-left: 4px solid var(--navy-blue);
+  box-shadow: 0 5px 15px rgba(26, 53, 97, 0.2), 0 3px 8px var(--shadow-color);
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .countdown-container h3 {
@@ -766,6 +773,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-bottom: 2px solid var(--navy-blue);
 }
 
 .time-section span:first-child {
@@ -999,11 +1007,11 @@ body {
 .coupon-inner {
   background: #fff;
   padding: 30px;
-  border: 2px dashed #ff85a2;
+  border: 2px dashed var(--navy-blue);
   border-radius: 15px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(255, 133, 162, 0.2);
+  box-shadow: 0 5px 15px rgba(26, 53, 97, 0.2);
   margin-bottom: 20px;
 }
 
@@ -1085,7 +1093,7 @@ body {
 }
 
 .send-btn {
-  background: linear-gradient(135deg, #ffa6c9, #ff85a2);
+  background: linear-gradient(135deg, var(--navy-light), var(--navy-blue));
   color: white;
   border: none;
   padding: 12px 25px;
@@ -1159,4 +1167,8 @@ body {
   10% { opacity: 1; }
   80% { opacity: 1; }
   100% { transform: translateY(-40px); opacity: 0; }
+}
+
+.floating-icon:nth-child(even) img {
+  filter: hue-rotate(240deg) saturate(50%) brightness(0.7);
 }
